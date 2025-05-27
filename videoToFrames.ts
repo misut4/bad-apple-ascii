@@ -63,10 +63,11 @@ async function insertFrame(
   );
 }
 
-// Send frames to console based on input fps
+// Send frames to console based on input fps for smoother animation
 function delayFrameToConsole(fps: number) {
   outputFrames.forEach((frame, index) => {
     setTimeout(() => {
+      console.clear(); // remove frame stuttering
       console.log(frame);
     }, ((index + 1) * 1000) / fps);
   });
@@ -105,8 +106,8 @@ export async function main(videoPath: string, fps: number) {
         console.log(
           "Progress: ",
           Math.round(
-            ((framePaths.indexOf(framePath) + 1) / framePaths.length) * 100
-          ),
+            ((framePaths.indexOf(framePath) + 1) / framePaths.length) * 1000
+          ) / 10, // show first decimal place
           "%"
         );
         resolve();
